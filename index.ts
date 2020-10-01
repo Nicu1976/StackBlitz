@@ -73,7 +73,9 @@ progress$.forEach(value => console.log(value + " from progress$"));
 
 
 
-// const count$ = array$.pipe(count());
+const count$ = array$.pipe(count());
+console.log("count$: ", count$.forEach(value => console.log(value)));
+//console.log(count$.forEach(value => console.log(value)));
 
 // const ratio$ = progress$.pipe(
 //   scan(current => current + 1, 0),
