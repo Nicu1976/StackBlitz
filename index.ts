@@ -73,6 +73,7 @@ requests$.forEach(value => console.log(value + " from request$"))
 const clicks$ = fromEvent(loadButton, "click");
 
 //progress$ se completeaza cand se face clic pe buton
+//practic se copie ce exista in request$ insa doar cand se face clicks$
 const progress$ = clicks$.pipe(
   switchMapTo(requests$),
   share()
@@ -84,7 +85,6 @@ progress$.forEach(value => console.log(value + " from progress$"));
 
 const count$ = array$.pipe(count());
 console.log("count$: ", count$.forEach(value => console.log(value)));
-//console.log(count$.forEach(value => console.log(value)));
 
 // const ratio$ = progress$.pipe(
 //   scan(current => current + 1, 0),
