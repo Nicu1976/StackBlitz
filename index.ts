@@ -59,7 +59,10 @@ array$.forEach(value => console.log(value))
 
 //request$ se completeaza imediat ce s-a declarat array$
 //practic request$ este un observable deorece concatAll() transforma array$
-//din observable de observables in un simplu observable iar pipe aplicat //acestui observable rezulta ca ia doar value
+//din observable de observables in un simplu observable si mai mult ia //doar value(care in cazul nostru este un string) din fiecare observable, //iar pipe il transforma din nou intr-un observable de string de aceasta //data 
+
+//The concatAll() operator subscribes to each "inner" Observable that //comes out of the "outer" Observable, and copies all the emitted values //until that Observable completes, and goes on to the next one. All of the //values are in that way concatenated. Other useful flattening operators ///(called join operators) are
+
 const requests$ = array$.pipe(concatAll());
 console.log("requests$: ")
 requests$.forEach(value => console.log(value + " from request$"))
