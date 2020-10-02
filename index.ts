@@ -55,7 +55,6 @@ console.log("observables: ", observables);
 console.log("array$: ");
 array$.forEach(value => console.log(value))
 
-
 //request$ se completeaza imediat ce s-a declarat array$
 const requests$ = array$.pipe(concatAll());
 console.log("requests$: ")
