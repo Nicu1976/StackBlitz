@@ -49,13 +49,17 @@ const observables: Array<Observable<string>> = [
   requestFour,
   requestFive
 ];
-
-const array$ = from(observables);
 console.log("observables: ", observables);
+
+
+//array$ este un observable de observables
+const array$ = from(observables);
 console.log("array$: ");
 array$.forEach(value => console.log(value))
 
 //request$ se completeaza imediat ce s-a declarat array$
+//practic request$ este un observable deorece concatAll() transforma array$
+//din observable de observables in un simplu observable iar pipe aplicat //acestui observable rezulta ca ia doar value
 const requests$ = array$.pipe(concatAll());
 console.log("requests$: ")
 requests$.forEach(value => console.log(value + " from request$"))
