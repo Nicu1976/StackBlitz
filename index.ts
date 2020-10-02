@@ -91,11 +91,13 @@ const ratio$ = progress$.pipe(
   //aici scan este o functie care returneza current in timp ce scaneaza //progress$. progress$ are 5 elemente, deci intai current va fi 0 + 1 = 1
   //dupa care se va duce in withLatestFrom in care ia ultima valoare din //count$ care este 5 si foloseste functia (current, count) => current / //count care in pasul 1 este 1 / 5, in pasul 2 este current = 1 + 1 / 5
   scan(current => current + 1, 0),
+  //aici foloseste versiunea 2 a withLatestFrom = 
+  //v2: ObservableInput<number>, project: (v1: number, v2: number) => number)
   withLatestFrom(count$, (current, count) => current / count)
 );
 console.log("ratio$: ")
 ratio$.forEach(value => console.log(value));
 
-// clicks$.pipe(switchMapTo(ratio$)).subscribe(updateProgress);
-
+//functii finale ce folosesc observabilele construite mai sus
+clicks$.pipe(switchMapTo(ratio$)).subscribe(updateProgress);
 progress$.subscribe(displayData);
