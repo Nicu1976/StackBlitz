@@ -86,10 +86,15 @@ progress$.forEach(value => console.log(value + " from progress$"));
 const count$ = array$.pipe(count());
 console.log("count$: ", count$.forEach(value => console.log(value)));
 
-// const ratio$ = progress$.pipe(
-//   scan(current => current + 1, 0),
-//   withLatestFrom(count$, (current, count) => current / count)
-// );
+//in timp ce se completeaza progress$ se face si ratio$
+const ratio$ = progress$.pipe(
+  //aici scan este o functie care returneza current in timp ce scaneaza //progress$. progress$ are 5 elemente, deci intai current va fi 0 + 1 = 1
+  //dupa care se va duce in withLatestFrom in care ia ultima valoare din //count$ care este 5 si foloseste functia (current, count) => current / //count care in pasul 1 este 1 / 5, in pasul 2 este current = 1 + 1 / 5
+  scan(current => current + 1, 0),
+  withLatestFrom(count$, (current, count) => current / count)
+);
+console.log("ratio$: ")
+ratio$.forEach(value => console.log(value));
 
 // clicks$.pipe(switchMapTo(ratio$)).subscribe(updateProgress);
 
