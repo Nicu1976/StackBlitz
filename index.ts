@@ -63,6 +63,9 @@ array$.forEach(value => console.log(value))
 
 //The concatAll() operator subscribes to each "inner" Observable that //comes out of the "outer" Observable, and copies all the emitted values //until that Observable completes, and goes on to the next one. All of the //values are in that way concatenated. Other useful flattening operators ///(called join operators) are
 
+//deci in concluzie:
+//array$ = Observable<Observable<string>> -> concatAll() => requests$ = //Observable<string>
+
 const requests$ = array$.pipe(concatAll());
 console.log("requests$: ")
 requests$.forEach(value => console.log(value + " from request$"))
